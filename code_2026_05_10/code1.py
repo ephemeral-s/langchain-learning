@@ -19,7 +19,7 @@ messages = [
 
 # 调用模型，让模型选择工具
 ai_msg = model_with_tools.invoke(messages)
-messages.append(ai_msg)
+messages.append(HumanMessage(ai_msg.content))
 
 # 本地调用
 for tool_call in ai_msg.tool_calls:

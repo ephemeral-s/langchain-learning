@@ -12,9 +12,10 @@ def split_into_list(input: Iterator[str]) -> Iterator[List[str]]:
         buff += chunk
         while "。" in buff:
             stop_index = buff.index("。")
-            yield [buff[:stop_index].strip()]
+            yield [buff[:stop_index].strip()] # yield会暂停函数并构造一个迭代器对象，等待下一次调用
             buff = buff[stop_index + 1:]
-    yield [buff.strip()]
+    if buff.strip():
+        yield [buff.strip()]
 
 chain = model | output_parser | split_into_list
 
